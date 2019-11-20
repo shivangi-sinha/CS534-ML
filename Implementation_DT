@@ -9,8 +9,9 @@ def getdata():
     y_val = val.iloc[:,n-1]
     x_test = test
     return x_train,y_train,x_val,y_val,x_test
-
-        class DTree:
+    
+ ## DT instance 
+class DTree:
         def __init__(self,depth):
             self.depth = depth   
 
@@ -19,22 +20,25 @@ def getdata():
 
         def rightnode(self, RN):
             self.rightNode = RN
-      
-    def gini(feature,y):
-      c0 = 0
-      c1 = 0
-      for item in y:
-          if (item == 0):
-              c0 += 1
-          else:
-              c1 += 1
-      t = c0 + c1       
-      neg = c0 / t         
-      pos = c1 / t    
+            
+            
+# Calculating of Gini      
+def gini(feature,y):
+    c0 = 0
+    c1 = 0
+    for item in y:
+        if (item == 0):
+            c0 += 1
+        else:
+             c1 += 1
+     t = c0 + c1       
+     neg = c0 / t         
+     pos = c1 / t    
 
-      g = 1 - (neg*neg + pos*pos)
+     g = 1 - (neg*neg + pos*pos)
     return g
-   
+    
+ # Benefit from feature  
 def benefit(x,feature,y):
    
     gini_imp = []
