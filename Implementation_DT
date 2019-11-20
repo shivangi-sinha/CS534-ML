@@ -1,0 +1,65 @@
+def getdata():
+    train = pd.read_csv('pa3_train.csv')
+    val = pd.read_csv('pa3_val.csv')
+    test = pd.read_csv('pa3_test.csv')
+    n = train.shape[1]
+    x_train = train.iloc[:,-(n-1)]
+    y_train = train.iloc[:,n-1]
+    x_val = val.iloc[:,-(n-1)]
+    y_val = val.iloc[:,n-1]
+    x_test = test
+    return x_train,y_train,x_val,y_val,x_test
+
+        class DTree:
+        def __init__(self,depth):
+            self.depth = depth   
+
+        def leftnode(self, LN):
+            self.leftNode = LN
+
+        def rightnode(self, RN):
+            self.rightNode = RN
+      
+    def gini(feature,y):
+      c0 = 0
+      c1 = 0
+      for item in y:
+          if (item == 0):
+              c0 += 1
+          else:
+              c1 += 1
+      t = c0 + c1       
+      neg = c0 / t         
+      pos = c1 / t    
+
+      g = 1 - (neg*neg + pos*pos)
+    return g
+   
+def benefit(x,feature,y):
+   
+    gini_imp = []
+    vals,count = np.unique(x[:,feature],return_counts=True)
+    vcount = len(vals)
+    total = np.sum(count)
+    # Calculating U(A)
+    for item in x[:,feature]:
+        
+        if (item == 0):
+            c0 += 1
+        else:
+            c1 += 1
+    t = c0 + c1       
+    neg = c0 / t         
+    pos = c1 / t    
+    
+    g = 1 - (neg*neg + pos*pos)      
+    
+    # Calculating U(AL) and U(AR)
+    for item in vals:
+        feat = copy(x)
+        feat = feat[np.where(my_df[:,feature] == item)]
+        gini_imp.append(gini_val(feat,y))
+    # Using formula U(A) - U(AL) - U(AR)
+    benefit = g - (gini_imp[0]*(count[0]/total)) - (gini_imp[1]*(count[1]/total))
+    return benefit
+
